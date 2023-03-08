@@ -9,14 +9,13 @@ const ShortenUrlPage = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const response = await axios.post('http://localhost:3000/shortenUrl', { longUrl: longUrl }, { headers: { 'Content-Type': 'application/json' } });
-        console.log(response);
         setShortUrl(response.data);
     };
 
     return (
         <div className="container">
             <form onSubmit={handleSubmit}>
-                <label htmlFor="longUrl">Long URL:</label>
+                <label htmlFor="longUrl">Input your URL:</label>
                 <input
                     id="longUrl"
                     type="text"
