@@ -15,10 +15,14 @@ cd url_shortener
 4. Setting up the backend:
 
    a. Change directory into the backend folder:
-   ```cd backend```
+   ```
+   cd backend
+   ```
 
    b. Install the necessary dependencies:
-   ```npm install```
+   ```
+   npm install
+   ```
 
    c. Start the backend server:
    ```
@@ -63,7 +67,7 @@ npm -v
 
 Make sure that the backend is running on `http://localhost:3000` and frontend on `http://localhost:3001`
 
-If you're still having trouble, try deleting the node_modules folder and running npm install again:
+If you're still having trouble, try deleting the `node_modules` folder and running `npm install` again:
 ```
 rm -rf node_modules
 npm install
