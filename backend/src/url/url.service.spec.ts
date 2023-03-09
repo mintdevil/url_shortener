@@ -121,7 +121,6 @@ describe('UrlService', () => {
 
       mnanoid.mockReturnValueOnce('12345abc');
       jest.spyOn(urlRepository, 'findOneBy').mockResolvedValueOnce(null);
-      jest.spyOn(urlRepository, 'findOneBy').mockResolvedValueOnce(null);
       jest.spyOn(urlRepository, 'create').mockImplementationOnce(() => ({
         id: 2,
         nanoCode: '12345abc',
@@ -136,6 +135,7 @@ describe('UrlService', () => {
       });
       const result = await urlService.shortenUrl(dto);
       expect(result).toEqual('http://localhost:8080/12345abc');
+      expect(urlRepository.findOneBy).toHaveBeenCalledTimes(3);
     });
 
     it('should throw a BadRequestException when given an invalid long URL', async () => {

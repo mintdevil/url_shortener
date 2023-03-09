@@ -56,7 +56,6 @@ export class UrlService {
       this.urlRepository.save(url);
       return url.shortUrl;
     } catch (error) {
-      console.error(error);
       throw new InternalServerErrorException(
         'Something went wrong while shortening the URL. Please try again.',
       );
@@ -69,7 +68,6 @@ export class UrlService {
       // check if url exists in the database using nanoCode
       url = await this.urlRepository.findOneBy({ nanoCode });
     } catch (error) {
-      console.error(error);
       throw new InternalServerErrorException(
         'Something went wrong while redirecting. Please try again.',
       );
