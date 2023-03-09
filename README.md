@@ -62,7 +62,7 @@ cd url_shortener
 
 ## Troubleshooting:
 
-If you get an error message when running npm install or npm start, make sure you have Node.js version 19.7.0 and npm version 9.5.0 installed. 
+If you get an error message when running npm install or npm start, make sure you have Node.js version `19.7.0` and npm version `9.5.0` installed. 
 
 To check your current versions:
 ```
@@ -77,3 +77,13 @@ If you're still having trouble, try deleting the `node_modules` folder and runni
 rm -rf node_modules
 npm install
 ```
+
+If you're running tests and getting `No tests found related to files changed since last commit.`, do try the below commands to run the test files.
+1. For frontend (make sure you are in the `frontend` folder):
+   ```
+   npm test -- ./src/ShortenUrlPage/ShortenUrlPage.test.js
+   ```
+2. For backend (make sure you are in the `backend` folder):
+   ```
+   npm run test --./src/url/url.service.spec.ts
+   ```
