@@ -45,7 +45,7 @@ describe('UrlService', () => {
   });
 
   describe('shortenUrl', () => {
-    const longUrl = 'https://google.com/';
+    const longUrl = 'https://example.com/';
     const nanoCode = 'abc12345';
     const shortUrl = 'http://localhost:8080/abc12345';
 
@@ -105,6 +105,55 @@ describe('UrlService', () => {
       });
       const result = await urlService.shortenUrl(dto);
       expect(result).toEqual(shortUrl);
+    });
+
+    it('should regenerate nanoCode if it already exists', async () => {
+      const dto: ShortenURLDtos = { longUrl };
+
+      mnanoid.mockReturnValueOnce(nanoCode);
+      jest.spyOn(urlRepository, 'findOneBy').mockResolvedValueOnce(null);
+      jest.spyOn(urlRepository, 'findOneBy').mockResolvedValueOnce({
+        id: 1,
+        nanoCode: nanoCode,
+        longUrl: 'https://google.com/',
+        shortUrl: shortUrl,
+      });
+
+      mnanoid.mockReturnValueOnce('12345abc');
+      jest.spyOn(urlRepository, 'findOneBy').mockResolvedValueOnce(null);
+      jest.spyOn(urlRepository, 'findOneBy').mockResolvedValueOnce(null);
+      jest.spyOn(urlRepository, 'create').mockImplementationOnce(() => ({
+        id: 2,
+        nanoCode: '12345abc',
+        shortUrl: 'http://localhost:8080/12345abc',
+        longUrl,
+      }));
+      jest.spyOn(urlRepository, 'save').mockResolvedValueOnce({
+        id: 2,
+        nanoCode: '12345abc',
+        longUrl,
+        shortUrl: 'http://localhost:8080/12345abc',
+      });
+      const result = await urlService.shortenUrl(dto);
+      expect(result).toEqual('http://localhost:8080/12345abc');
+    });
+
+    it('should throw a BadRequestException when given an invalid long URL', async () => {
+      const dto: ShortenURLDtos = { longUrl: 'invalid-url' };
+
+      await expect(urlService.shortenUrl(dto)).rejects.toThrow(
+        BadRequestException,
+      );
+    });
+
+    it('should throw an InternalServerErrorException when there is an error while creating a shortened URL', async () => {
+      const dto: ShortenURLDtos = { longUrl };
+
+      jest.spyOn(urlRepository, 'findOneBy').mockRejectedValueOnce(new Error());
+
+      await expect(urlService.shortenUrl(dto)).rejects.toThrow(
+        InternalServerErrorException,
+      );
     });
   });
 });

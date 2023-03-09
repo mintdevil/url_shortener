@@ -56,7 +56,7 @@ cd url_shortener
    npm test
    ```
 
-6. Navigate to http://localhost:3001 to view the application.
+6. Navigate to [http://localhost:3000](http://localhost:3000) to view the application.
 
 ---
 
