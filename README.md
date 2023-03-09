@@ -29,6 +29,11 @@ cd url_shortener
    npm run start
    ```
 
+   d. To run tests for the backend:
+   ```
+   npm run test
+   ```
+
 5. Setting up the frontend:
 
    a. Change directory into the frontend folder:
