@@ -8,7 +8,7 @@ const ShortenUrlPage = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await axios.post('http://localhost:3000/shortenUrl', { longUrl: longUrl }, { headers: { 'Content-Type': 'application/json' } });
+        const response = await axios.post('http://localhost:8080/shortenUrl', { longUrl: longUrl }, { headers: { 'Content-Type': 'application/json' } });
         setShortUrl(response.data);
     };
 

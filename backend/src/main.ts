@@ -10,6 +10,6 @@ async function bootstrap() {
   // Apply CORS middleware
   app.use(cors());
 
-  await app.listen(3000);
+  await app.listen(8080);
 }
 bootstrap();

@@ -65,7 +65,7 @@ node -v
 npm -v
 ```
 
-Make sure that the backend is running on `http://localhost:3000` and frontend on `http://localhost:3001`
+Make sure that the backend is running on [http://localhost:8080](http://localhost:8080) and frontend on [http://localhost:3000](http://localhost:3000)
 
 If you're still having trouble, try deleting the `node_modules` folder and running `npm install` again:
 ```

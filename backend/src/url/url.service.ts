@@ -28,7 +28,7 @@ export class UrlService {
 
     // generate unique code
     let nanoCode = nanoid(8);
-    const baseURL = 'http://localhost:3000';
+    const baseURL = 'http://localhost:8080';
 
     try {
       // check if url has already been shortened before

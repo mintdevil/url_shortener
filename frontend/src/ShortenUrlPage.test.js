@@ -25,7 +25,7 @@ describe('ShortenUrlPage', () => {
   test('long url posted correctly', async () => {
     render(<ShortenUrlPage />);
     const longUrl = 'https://www.example.com/this-is-a-very-very-long-url';
-    const shortUrl = 'http://localhost:3000/abc123';
+    const shortUrl = 'http://localhost:8080/abc123';
     axios.post.mockResolvedValueOnce({ data: shortUrl });
     const longUrlInput = screen.getByLabelText(/input your url/i);
     const submitButton = screen.getByText(/shorten/i);
@@ -33,7 +33,7 @@ describe('ShortenUrlPage', () => {
     fireEvent.click(submitButton);
     await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1));
     expect(axios.post).toHaveBeenCalledWith(
-      'http://localhost:3000/shortenUrl',
+      'http://localhost:8080/shortenUrl',
       { longUrl: longUrl },
       { headers: { 'Content-Type': 'application/json' } }
     );
@@ -42,7 +42,7 @@ describe('ShortenUrlPage', () => {
   test('short url displays correctly', async () => {
     render(<ShortenUrlPage />);
     const longUrl = 'https://www.example.com/this-is-a-long-url';
-    const shortUrl = 'http://localhost:3000/abc123';
+    const shortUrl = 'http://localhost:8080/abc123';
     axios.post.mockResolvedValueOnce({ data: shortUrl });
     const longUrlInput = screen.getByLabelText(/input your url/i);
     const submitButton = screen.getByText(/shorten/i);
