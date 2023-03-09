@@ -5,11 +5,20 @@ import "./ShortenUrlPage.css"
 const ShortenUrlPage = () => {
     const [longUrl, setLongUrl] = useState('');
     const [shortUrl, setShortUrl] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
 
     const handleSubmit = async (event) => {
+        setShortUrl('');
+        setErrorMsg('');
         event.preventDefault();
-        const response = await axios.post('http://localhost:8080/shortenUrl', { longUrl: longUrl }, { headers: { 'Content-Type': 'application/json' } });
-        setShortUrl(response.data);
+        await axios.post('http://localhost:8080/shortenUrl', { longUrl: longUrl }, { headers: { 'Content-Type': 'application/json' } })
+        .then((res) => {
+            setShortUrl(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
+            setErrorMsg(err.response.data.message);
+        });
     };
 
     return (
@@ -28,6 +37,7 @@ const ShortenUrlPage = () => {
                         Short URL: <a href={shortUrl}>{shortUrl}</a>
                     </p>
                 )}
+                {errorMsg && <p className="error">Error: {errorMsg}</p>}
             </form>
         </div>
     );
