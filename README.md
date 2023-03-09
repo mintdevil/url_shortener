@@ -36,9 +36,9 @@ cd url_shortener
 
 5. Setting up the frontend:
 
-   a. Change directory into the frontend folder:
+   a. Open another terminal and change directory into the frontend folder:
    ```
-   cd ../frontend
+   cd url_shortener/frontend
    ```
 
    b. Install the necessary dependencies:
