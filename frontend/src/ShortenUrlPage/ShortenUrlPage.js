@@ -16,7 +16,6 @@ const ShortenUrlPage = () => {
             setShortUrl(res.data);
         })
         .catch((err) => {
-            console.log(err);
             setErrorMsg(err.response.data.message);
         });
     };
