@@ -1,5 +1,5 @@
 import React from 'react';
-import ShortenUrlPage from './ShortenUrlPage';
+import ShortenUrlPage from './ShortenUrlPage/ShortenUrlPage';
 
 function App() {
   return (
