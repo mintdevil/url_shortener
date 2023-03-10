@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import "./ShortenUrlPage.css"
+import './ShortenUrlPage.css';
 
 const ShortenUrlPage = () => {
     const [longUrl, setLongUrl] = useState('');
@@ -11,18 +11,24 @@ const ShortenUrlPage = () => {
         setShortUrl('');
         setErrorMsg('');
         event.preventDefault();
-        await axios.post('http://localhost:8080/shortenUrl', { longUrl: longUrl }, { headers: { 'Content-Type': 'application/json' } })
-        .then((res) => {
-            setShortUrl(res.data);
-        })
-        .catch((err) => {
-            setErrorMsg(err.response.data.message);
-        });
+        await axios
+            .post(
+                'http://localhost:8080/shortenUrl',
+                { longUrl: longUrl },
+                { headers: { 'Content-Type': 'application/json' } }
+            )
+            .then((res) => {
+                setShortUrl(res.data);
+            })
+            .catch((err) => {
+                setErrorMsg(err.response.data.message);
+            });
     };
 
     return (
         <div className="container">
             <form onSubmit={handleSubmit}>
+                <h1>Jasmin's Url Shortener</h1>
                 <label htmlFor="longUrl">Input your URL:</label>
                 <input
                     id="longUrl"
