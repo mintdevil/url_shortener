@@ -17,7 +17,7 @@ describe('ShortenUrlPage', () => {
   test('renders the page correctly', () => {
     render(<ShortenUrlPage />);
     const longUrlInput = screen.getByLabelText(/input your url/i);
-    const submitButton = screen.getByText(/shorten/i);
+    const submitButton = screen.getByRole('button', {name: /shorten/i});
     expect(longUrlInput).toBeInTheDocument();
     expect(submitButton).toBeInTheDocument();
   });
@@ -28,7 +28,7 @@ describe('ShortenUrlPage', () => {
     const shortUrl = 'http://localhost:8080/abc123';
     axios.post.mockResolvedValueOnce({ data: shortUrl });
     const longUrlInput = screen.getByLabelText(/input your url/i);
-    const submitButton = screen.getByText(/shorten/i);
+    const submitButton = screen.getByRole('button', {name: /shorten/i});
     fireEvent.change(longUrlInput, { target: { value: longUrl } });
     fireEvent.click(submitButton);
     await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1));
@@ -45,7 +45,7 @@ describe('ShortenUrlPage', () => {
     const shortUrl = 'http://localhost:8080/abc123';
     axios.post.mockResolvedValueOnce({ data: shortUrl });
     const longUrlInput = screen.getByLabelText(/input your url/i);
-    const submitButton = screen.getByText(/shorten/i);
+    const submitButton = screen.getByRole('button', {name: /shorten/i});
     fireEvent.change(longUrlInput, { target: { value: longUrl } });
     fireEvent.click(submitButton);
     await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1));
